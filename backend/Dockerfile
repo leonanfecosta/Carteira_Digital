@@ -1,8 +1,10 @@
-FROM node:16.14-alpine
+FROM node:16.18
 
-WORKDIR /app-backend
-
+WORKDIR /app/backend
+ 
 COPY package* ./
+
+RUN npm config set cache /tmp --global
 
 RUN npm install
 
