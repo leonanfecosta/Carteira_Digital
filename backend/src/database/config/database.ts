@@ -11,7 +11,7 @@ const config: Options = {
   port: 5432,
   dialectOptions: {
     timezone: "Z",
-  },
+  }, 
   logging: false,
   define: {
     timestamps: true,

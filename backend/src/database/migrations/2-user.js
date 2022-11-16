@@ -13,17 +13,20 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      role: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       password: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      accountId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'accounts',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        field: 'account_id',
       },
     });
   },
