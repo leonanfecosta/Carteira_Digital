@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "md5": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/md5": "^2.3.2"
+  }
+}
