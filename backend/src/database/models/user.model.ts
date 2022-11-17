@@ -40,5 +40,6 @@ User.init(
 );
 
 User.belongsTo(Account, { foreignKey: 'accountId', as: 'account' });
+Account.hasOne(User, { foreignKey: 'accountId', as: 'userAccount' });
 
 export default User;

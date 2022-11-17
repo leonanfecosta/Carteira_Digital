@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { IRegisterUser } from '../interfaces/user.interface';
 import User from '../database/models/user.model';
+import customError from '../errors/customError';
 
-export const registerMiddleware = async (
+export default class RegisterMiddleware {
+ public rulesValidation = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -10,7 +12,7 @@ export const registerMiddleware = async (
   const user: IRegisterUser = req.body;
   const { username, password } = user;
   if (username.length < 3) {
-    return res.status(400).json({ message: 'Username must be at least 3 characters long' });
+    throw new customError(400, 'Username must be at least 3 characters long');
   }
   const foundUser = await User.findOne({
     where: {
@@ -18,20 +20,19 @@ export const registerMiddleware = async (
     },
   });
   if (foundUser) {
-    return res.status(409).json({
-      message: 'Username already exists',
-    });
+    throw new customError(409, 'Username already exists');
   }
 
   const regex =
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z$*&@#]{8,}$/;
 
   if (!regex.test(password)) {
-    return res.status(400).json({
-      message:
-        'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number',
-    });
+    throw new customError(
+      400,
+      'Password must contain at least 8 characters, one uppercase, one lowercase and one number'
+    );
   }
 
   next();
 };
+}

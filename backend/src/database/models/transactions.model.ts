@@ -4,7 +4,7 @@ import Account from './accounts.model';
 
 class Transaction extends Sequelize.Model {
   id!: number;
-  debitedAccountId!: string;
+  debitedAccountId!: number;
   creditedAccountId!: number;
   value!: number;
   createdAt!: Date;
@@ -19,12 +19,12 @@ Transaction.init(
       allowNull: false,
     },
     debitedAccountId: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false,
       field: 'debited_account_id',
     },
     creditedAccountId: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false,
       field: 'credited_account_id',
     },
@@ -46,7 +46,21 @@ Transaction.init(
   }
 );
 
-Transaction.belongsTo(Account, { foreignKey: 'debitedAccountId', as: 'debitedAccount' });
-Transaction.belongsTo(Account, { foreignKey: 'creditedAccountId', as: 'creditedAccount' });
+Transaction.belongsTo(Account, {
+  foreignKey: 'debitedAccountId',
+  as: 'debitedAccount',
+});
+Transaction.belongsTo(Account, {
+  foreignKey: 'creditedAccountId',
+  as: 'creditedAccount',
+});
 
+Account.hasMany(Transaction, {
+  foreignKey: 'debitedAccountId',
+  as: 'debitedTransactions',
+});
+Account.hasMany(Transaction, {
+  foreignKey: 'creditedAccountId',
+  as: 'creditedTransactions',
+});
 export default Transaction;

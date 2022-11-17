@@ -1,4 +1,7 @@
 import * as express from "express";
+require('express-async-errors');
+import UserRouter from "./routes/user.routes";
+import buildError from "./errors/buildError";
 
 class App {
   public app: express.Express;
@@ -27,6 +30,8 @@ class App {
     this.app.use(accessControl);
 
     // rotas aqui
+    this.app.use("/user", UserRouter);
+    this.app.use(buildError);
   }
 
   public start(PORT: string | number): void {
