@@ -1,7 +1,8 @@
-import * as express from "express";
+import * as express from 'express';
 require('express-async-errors');
-import UserRouter from "./routes/user.routes";
-import buildError from "./errors/buildError";
+import UserRouter from './routes/user.routes';
+import TransactionRouter from './routes/transactions.routes';
+import buildError from './errors/buildError';
 
 class App {
   public app: express.Express;
@@ -12,17 +13,17 @@ class App {
     this.config();
 
     // Não remover essa rota
-    this.app.get("/", (req, res) => res.json({ ok: true }));
+    this.app.get('/', (req, res) => res.json({ ok: true }));
   }
 
   private config(): void {
     const accessControl: express.RequestHandler = (_req, res, next) => {
-      res.header("Access-Control-Allow-Origin", "*");
+      res.header('Access-Control-Allow-Origin', '*');
       res.header(
-        "Access-Control-Allow-Methods",
-        "GET,POST,DELETE,OPTIONS,PUT,PATCH"
+        'Access-Control-Allow-Methods',
+        'GET,POST,DELETE,OPTIONS,PUT,PATCH'
       );
-      res.header("Access-Control-Allow-Headers", "*");
+      res.header('Access-Control-Allow-Headers', '*');
       next();
     };
 
@@ -30,7 +31,8 @@ class App {
     this.app.use(accessControl);
 
     // rotas aqui
-    this.app.use("/user", UserRouter);
+    this.app.use('/user', UserRouter);
+    this.app.use(TransactionRouter);
     this.app.use(buildError);
   }
 
