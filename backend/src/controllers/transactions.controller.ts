@@ -31,10 +31,6 @@ export default class TransactionController {
         recipient
       )) as IUserInfo;
 
-      const { balance } = senderInfo.account;
-      if (amount > balance) {
-        throw new CustomError(400, 'Insufficient funds');
-      }
       await this._transactionService.updateBalance(
         senderInfo,
         recipientInfo,

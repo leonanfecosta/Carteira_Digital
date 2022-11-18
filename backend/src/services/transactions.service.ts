@@ -1,6 +1,5 @@
 import Transaction from '../database/models/transactions.model';
 import Account from '../database/models/accounts.model';
-import CustomError from '../errors/customError';
 import { IUserInfo } from '../interfaces/user.interface';
 
 export default class TransactionService {
