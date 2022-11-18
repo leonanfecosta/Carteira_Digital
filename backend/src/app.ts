@@ -1,5 +1,5 @@
 import * as express from 'express';
-require('express-async-errors');
+// require('express-async-errors');
 import UserRouter from './routes/user.routes';
 import TransactionRouter from './routes/transactions.routes';
 import buildError from './errors/buildError';

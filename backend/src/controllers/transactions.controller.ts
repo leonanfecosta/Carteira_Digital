@@ -1,8 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import TransactionService from '../services/transactions.service';
+import UserService from '../services/user.service';
+import { IUserInfo } from '../interfaces/user.interface';
+import CustomError from '../errors/customError';
 
 export default class TransactionController {
-  constructor(private _transactionService: TransactionService) {}
+  constructor(
+    private _transactionService: TransactionService,
+    private _userService: UserService
+  ) {}
 
   public createTransaction = async (
     req: Request,
@@ -10,16 +16,39 @@ export default class TransactionController {
     next: NextFunction
   ) => {
     try {
-      const { sender, recipient, amount } = req.body;
-      const transaction = await this._transactionService.createTransaction(
-        sender,
-        recipient,
+      const { recipient, amount } = req.body;
+      const sender = res.locals.user
+
+      if (!recipient || !amount || !sender) {
+        throw new CustomError(400, 'Missing fields');
+      }
+
+      const senderInfo = (await this._userService.getUserInfo(
+        sender
+      )) as IUserInfo;
+
+      const recipientInfo = (await this._userService.getUserInfo(
+        recipient
+      )) as IUserInfo;
+
+      const { balance } = senderInfo.account;
+      if (amount > balance) {
+        throw new CustomError(400, 'Insufficient funds');
+      }
+      await this._transactionService.updateBalance(
+        senderInfo,
+        recipientInfo,
         amount
       );
-      res.status(201).json(transaction);
+
+      const transaction = await this._transactionService.createTransaction(
+        senderInfo,
+        recipientInfo,
+        amount
+      );
+      res.status(200).json(transaction);
     } catch (error) {
       next(error);
     }
   };
 }
-

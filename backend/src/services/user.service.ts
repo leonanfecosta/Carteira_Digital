@@ -55,6 +55,10 @@ export default class UserService {
       },
     }) as unknown as IUser;
 
+     if (!userInfo) {
+       throw new CustomError(404, 'User not found');
+     }
+
     return userInfo;
   };
 }
