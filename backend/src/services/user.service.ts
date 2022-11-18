@@ -2,7 +2,9 @@ import * as md5 from 'md5';
 import User from '../database/models/user.model';
 import Account from '../database/models/accounts.model';
 import { IRegisterUser, IUser } from '../interfaces/user.interface';
+import { IToken } from '../interfaces/token.interface';
 import CustomError from '../errors/customError';
+import createToken from '../utils/createToken';
 
 export default class UserService {
   public register = async (user: IRegisterUser): Promise<IUser> => {
@@ -20,5 +22,22 @@ export default class UserService {
       throw new CustomError(500, 'Something went wrong');
     }
     return newUser;
+  };
+
+  public login = async (user: IRegisterUser): Promise<IToken> => {
+    const { username, password } = user;
+    const userInfo = await User.findOne({
+      where: {
+        username,
+    }});
+    if (!userInfo) {
+      throw new CustomError(404, 'User not found');
+    }
+    const validatePassword = md5(password) === userInfo.password;
+    if (!validatePassword) {
+      throw new CustomError(400, 'Invalid password');
+    }
+    const token = createToken(username);
+    return { token };
   };
 }

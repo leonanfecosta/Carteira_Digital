@@ -13,4 +13,14 @@ export default class UserController {
       next(error);
     }
   };
+
+  public login = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const user: IRegisterUser = req.body;
+      const token = await this._userService.login(user);
+      res.status(200).json(token);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
