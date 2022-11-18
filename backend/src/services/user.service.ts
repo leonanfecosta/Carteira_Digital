@@ -29,7 +29,9 @@ export default class UserService {
     const userInfo = await User.findOne({
       where: {
         username,
-    }});
+      },
+    });
+
     if (!userInfo) {
       throw new CustomError(404, 'User not found');
     }
@@ -39,5 +41,20 @@ export default class UserService {
     }
     const token = createToken(username);
     return { token };
+  };
+
+  public getUserInfo = async (username: string): Promise<IUser> => {
+    const userInfo = await User.findOne({
+      where: {
+        username,
+      },
+      include: {
+        model: Account,
+        as: 'account',
+        attributes: ['balance'],
+      },
+    }) as unknown as IUser;
+
+    return userInfo;
   };
 }

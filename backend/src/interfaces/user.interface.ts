@@ -7,3 +7,9 @@ export interface IUser extends IRegisterUser {
   id: number;
   accountId: string;
 }
+
+export interface IUserInfo extends IUser {
+  account: {
+    balance: number;
+  };
+}

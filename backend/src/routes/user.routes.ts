@@ -18,4 +18,6 @@ router.post(
 
 router.post('/login', userController.login);
 
+router.get('/account', validateToken.validateToken, userController.getUserInfo);
+
 export default router;
