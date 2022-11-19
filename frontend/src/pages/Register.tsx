@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import axios, { AxiosError } from 'axios';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import axios, { AxiosError } from 'axios';
-import { IUser } from '../interfaces/user.interface';
-import style from '../styles/Login.module.css';
+import style from '../styles/Register.module.css';
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -18,19 +17,14 @@ export default function Login() {
     setBtnDisabled(!(username.length >= 3 && password && regex.test(password)));
   }, [username, password]);
 
-  const handleLogin = async (event: React.FormEvent) => {
+  const handleRegister = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const result = await axios.post(
-        'http://localhost:3001/user/login',
-        {
-          username,
-          password,
-        }
-      );
-      const user = result.data as IUser;
-      localStorage.setItem('user', JSON.stringify(user));
-      navigate('/home');
+      await axios.post('http://localhost:3001/user/register', {
+        username,
+        password,
+      });
+      navigate('/login');
     } catch (error: AxiosError | any) {
       if (error.response as AxiosError) {
         setError(error.response.data.message);
@@ -39,15 +33,16 @@ export default function Login() {
       }
     }
   };
+
   return (
-    <div className={style.login}>
-      <div className={style.leftLogin}>
-        <h1>BEM VINDO A NG.CASH</h1>
-        <h2>A CARTEIRA DA NOVA GERAÇÃO.</h2>
+    <div className={style.register}>
+      <div className={style.leftRegister}>
+        <h1>Cadastre-se e tenha a carteira da nova geração</h1>
+        <h2>É para todas as idades!</h2>
       </div>
-      <form className={style.rightLogin}>
-        <div className={style.cardLogin}>
-          <h1>LOGIN</h1>
+      <form className={style.rightRegister}>
+        <div className={style.cardRegister}>
+          <h1>REGISTRO</h1>
           <div className={style.inputContainer}>
             <Input
               label="Nome de Usuário"
@@ -65,17 +60,27 @@ export default function Login() {
               placeholder="Digite sua senha"
               onChange={({ target: { value } }) => setPassword(value)}
             />
-            {error && <p className={style.error}>Usuário ou Senha Inválidos</p>}
+
+            {error && <p className={style.error}>Usuário ja existe</p>}
+
+            {password && (
+              <ul>
+                <li>Deve conter no mínimo 8 caracteres</li>
+                <li>Deve conter pelo menos uma letra maiúscula</li>
+                <li>Deve conter pelo menos um número</li>
+              </ul>
+            )}
+
             <Button
               type="submit"
-              name="Entrar"
+              name="Registrar"
               disabled={btnDisabled}
-              onClick={handleLogin}
-              className={style.btnLogin}
+              onClick={handleRegister}
+              className={style.btnRegister}
             />
 
             <p>
-              <Link to="/register"> Ainda não tenho conta</Link>
+              Já tem uma conta? <Link to="/login"> Faça login</Link>
             </p>
           </div>
         </div>
