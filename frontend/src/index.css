@@ -12,7 +12,7 @@
 }
 
 html {
-  background-image: url(/src/assets/imagens/banner-landing-page.0bd7f55.jpg);
+  background-color: var(--background-color);
   box-sizing: border-box;
   font-size: 16px;
   color: var(--text-color);
