@@ -1,3 +1,5 @@
+import styles from '../styles/Login.module.css';
+
 interface InputProps {
   label: string;
   value: string;
@@ -16,7 +18,7 @@ export default function Input({
   onChange,
 }: InputProps) {
   return (
-    <div className="input">
+    <div className={styles.inputContainer}>
       <label>{label}</label>
       <input
         type={type}

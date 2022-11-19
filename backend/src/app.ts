@@ -1,8 +1,9 @@
 import * as express from 'express';
-// require('express-async-errors');
+require('express-async-errors');
 import UserRouter from './routes/user.routes';
 import TransactionRouter from './routes/transactions.routes';
 import buildError from './errors/buildError';
+const cors = require('cors');
 
 class App {
   public app: express.Express;
@@ -29,6 +30,7 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+    this.app.use(cors());
 
     // rotas aqui
     this.app.use('/user', UserRouter);
