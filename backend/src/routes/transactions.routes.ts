@@ -20,4 +20,16 @@ router.post(
   transactionController.createTransaction
 );
 
+router.get(
+  '/transaction',
+  validateToken.validateToken,
+  transactionController.getTransactions
+);
+
+router.get(
+  '/transaction/filter',
+  validateToken.validateToken,
+  transactionController.filterTransactionsByDate
+);
+
 export default router;
