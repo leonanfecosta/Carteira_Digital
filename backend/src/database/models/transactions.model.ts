@@ -29,7 +29,7 @@ Transaction.init(
       field: 'credited_account_id',
     },
     value: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.NUMBER,
       allowNull: false,
     },
     createdAt: {

@@ -7,6 +7,8 @@ import TransferCard from '../components/TransferCard';
 import convertNumber from '../utils/convertNumber';
 import style from '../styles/Main.module.css';
 import { useNavigate } from 'react-router-dom';
+import TransferTable from '../components/TransferTable';
+import { ITransactionInfo } from '../interfaces/transactions.interface';
 
 export default function Main() {
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ export default function Main() {
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
   const [error, setError] = useState('');
+  const [transactions, setTransactions] = useState<ITransactionInfo[]>([]);
 
   const fetchUserInfo = useCallback(async () => {
     try {
@@ -39,6 +42,22 @@ export default function Main() {
     }
   }, [navigate, user]);
 
+  const getTransactions = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:3001/transaction/filter',
+        {
+          headers: {
+            Authorization: user?.token as string,
+          },
+        }
+      );
+      setTransactions(response.data);
+    } catch (error: AxiosError | any) {
+      console.log(error);
+    }
+  }, [user]);
+
   const handleTransfer = useCallback(async () => {
     try {
       const response = await axios.post(
@@ -54,6 +73,7 @@ export default function Main() {
         }
       );
       fetchUserInfo();
+      getTransactions();
       setRecipient('');
       setAmount('');
       setError('');
@@ -87,7 +107,8 @@ export default function Main() {
 
   useEffect(() => {
     fetchUserInfo();
-  }, [fetchUserInfo]);
+    getTransactions();
+  }, [fetchUserInfo, getTransactions]);
 
   return (
     <div>
@@ -110,6 +131,12 @@ export default function Main() {
             error={error}
           />
         </div>
+      </div>
+      <div className={style.table}>
+        <TransferTable
+          username={user?.username as string}
+          transactions={transactions}
+        />
       </div>
     </div>
   );
