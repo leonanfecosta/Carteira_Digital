@@ -17,7 +17,7 @@ Account.init(
       allowNull: false,
     },
     balance: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.NUMBER,
       allowNull: false,
     },
   },
