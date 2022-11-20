@@ -1,0 +1,46 @@
+.header {
+  border-bottom: 1px #111111 solid;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto;
+  max-width: 1200px;
+}
+
+.logo {
+  width: 80px;
+}
+
+.menu {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.menu > h3 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: 0 20px;
+}
+
+.menu > h3:hover {
+  color: #c5c5c5;
+}
+
+.btnLogOut {
+  background: #111111;
+  border: 1px #c5c5c5 solid;
+  border-radius: 15px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 5px 10px;
+  height: 60%;
+  width: 100px;
+}
+
+.btnLogOut:hover {
+  background: #c5c5c5;
+  color: #111111;
+}

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../assets/imagens/logo-ngcash-branco.88c5860.svg'
 import { IUser } from '../interfaces/user.interface';
 import Button from './Button';
+import style from '../styles/Header.module.css';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -15,18 +16,17 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="header">
+    <header className={style.header}>
       <nav>
         <img
           src={logo}
           alt="Logo NgCash"
-          className="header__logo"
-          style={{ width: '100px' }}
+          className={style.logo}
         />
       </nav>
 
-      <div className="header__content">
-        <h3 className="header__title">{`Bem vindo, ${user?.username}`}</h3>
+      <div className={style.menu}>
+        <h3>{`Bem vindo, ${user?.username}`}</h3>
         <Button
           type='button'
           name='Sair'
@@ -35,6 +35,7 @@ export default function Header() {
             localStorage.removeItem('user');
             navigate('/login');
           }}
+          className={style.btnLogOut}
         />
       </div>
     </header>
