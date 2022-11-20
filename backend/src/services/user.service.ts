@@ -49,6 +49,7 @@ export default class UserService {
       where: {
         username,
       },
+      attributes: { exclude: ['password'] },
       include: {
         model: Account,
         as: 'account',

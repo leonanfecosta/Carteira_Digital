@@ -26,7 +26,8 @@ export default class UserController {
 
   public getUserInfo = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const username = req.query.username as string;
+      const username = res.locals.user;
+      
       const userInfo = await this._userService.getUserInfo(username);
       res.status(200).json(userInfo);
     } catch (error) {
