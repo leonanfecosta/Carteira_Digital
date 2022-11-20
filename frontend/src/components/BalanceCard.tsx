@@ -8,7 +8,7 @@ export default function BalanceCard({ balance }: BalanceCardProps) {
   return (
     <div className={style.balance_card}>
       <h1>Saldo atual</h1>
-      <h2>R$ {balance}</h2>
+      <h2>{balance}</h2>
     </div>
   );
 }

@@ -1,0 +1,64 @@
+.transfer_card {
+  width: 50%;
+  max-height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #111111;
+  border-radius: 1.8rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+  padding: 30px 35px;
+}
+
+.transfer_card>h1 {
+  color: var(--font-color);
+  font-weight: 800;
+  margin: 0;
+  font-family: var(--text-font);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.transfer_card>h2 {
+  color: var(--font-color);
+  font-weight: 800;
+  margin: 0;
+  font-family: var(--text-font);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 2.5rem;
+}
+
+.transfer_btn {
+  width: 100%;
+  padding: 16px 0;
+  margin-top: 25px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-family: var(--text-font);
+  letter-spacing: 1.5px;
+  color: #0a0a0a;
+  background-color: #0f8;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  font-size: 14pt;
+}
+
+.transfer_btn:disabled {
+  background-color: #c5c5c5;
+  cursor: auto;
+}
+
+.error {
+  color: #f00;
+  font-size: 12pt;
+  font-weight: 500;
+  font-family: var(--text-font);
+  margin-top: 10px;
+}

@@ -35,7 +35,7 @@ export default class TransactionService {
       debitedAccountId: senderInfo.id,
       creditedAccountId: recipientInfo.id,
       value: amount,
-      createdAt: new Date(98, 1),
+      createdAt: new Date(),
     });
 
     return transaction;

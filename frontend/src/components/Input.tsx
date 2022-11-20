@@ -2,9 +2,9 @@ import styles from '../styles/Login.module.css';
 
 interface InputProps {
   label: string;
-  value: string;
+  value: string | number;
   name: string;
-  type: 'text' | 'password';
+  type: 'text' | 'password' | 'number';
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
 }
