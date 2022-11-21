@@ -1,5 +1,8 @@
 # Desafio-NG.CASH
 
+## Desafio 
+Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo seja possibilitar que usuários da NG consigam realizar transferências internas entre si.
+
 ### Instruções
 
 Você precisa ter instalado as seguintes ferramentas: [Git](https://git-scm.com), [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/install/).
@@ -140,9 +143,17 @@ Para ter acesso ao front end da aplicação, basta apenas acessar o endereço `h
 
 Página de acesso do usuário onde é preciso digitar seu `username` com mais de 3 caracteres e sua `senha` com 8 caracteres, contendo letras maiúsculas, minúsculas e números. Caso ainda não tenha conta na NG é possível clicar em `Ainda não tenho conta`para realizar seu cadastro.
 
+<p align="center">
+  <img src="https://github.com/leonanfecosta/Desafio-NG.CASH/blob/main/frontend/imagens/tela%20de%20login.png" alt="Desafio NG.CASH - Login"/>
+</p>
+
 ## Página de Resgistro
 
 Página para realizar o cadastro na NG informando `username` e `senha` seguindo os mesmos parametros da tela de login.
+
+<p align="center">
+  <img src="https://github.com/leonanfecosta/Desafio-NG.CASH/blob/main/frontend/imagens/tela%20de%20registro.png" alt="Desafio NG.CASH - Registro"/>
+</p>
 
 ## Tela principal
 
@@ -154,6 +165,9 @@ Com o usuário logado, a tela principal apresenta:
 
 - Botão para realizar o log-out.
 
+<p align="center">
+  <img src="https://github.com/leonanfecosta/Desafio-NG.CASH/blob/main/frontend/imagens/tela%20principal.png" alt="Desafio NG.CASH - Tela Principal"/>
+</p>
 
 
 Ao rolar a tela para baixo, é possível visualizar:
@@ -161,3 +175,8 @@ Ao rolar a tela para baixo, é possível visualizar:
 - Tabela com os detalhes de todas as transações que o usuário participou;
 
 - Mecanismo para filtrar a tabela por data de transação e/ou transações do tipo cash-in/cash-out;
+
+<p align="center">
+  <img src="https://github.com/leonanfecosta/Desafio-NG.CASH/blob/main/frontend/imagens/historico%20de%20transa%C3%A7%C3%A3o.png" alt="Desafio NG.CASH - Histórico de Transações"/>
+</p>
+
