@@ -132,8 +132,6 @@ Há diversos tipos de filtros a serem aplicados, sendo eles:
 | cash-out          | Retorna todas as transações filtradas  por transações feitas              |
 | date              | Retorna todas as transações filtradas por data                            |
 
-
-
 # Front End
 
 Para ter acesso ao front end da aplicação, basta apenas acessar o endereço `http://localhost:3000/`.
@@ -142,13 +140,9 @@ Para ter acesso ao front end da aplicação, basta apenas acessar o endereço `h
 
 Página de acesso do usuário onde é preciso digitar seu `username` com mais de 3 caracteres e sua `senha` com 8 caracteres, contendo letras maiúsculas, minúsculas e números. Caso ainda não tenha conta na NG é possível clicar em `Ainda não tenho conta`para realizar seu cadastro.
 
-![](/home/leonancosta/.var/app/com.github.marktext.marktext/config/marktext/images/2022-11-21-17-35-30-image.png)
-
 ## Página de Resgistro
 
 Página para realizar o cadastro na NG informando `username` e `senha` seguindo os mesmos parametros da tela de login.
-
-![](/home/leonancosta/.var/app/com.github.marktext.marktext/config/marktext/images/2022-11-21-17-42-18-image.png)
 
 ## Tela principal
 
@@ -160,12 +154,10 @@ Com o usuário logado, a tela principal apresenta:
 
 - Botão para realizar o log-out.
 
-![](/home/leonancosta/.var/app/com.github.marktext.marktext/config/marktext/images/2022-11-21-17-44-28-image.png)
+
 
 Ao rolar a tela para baixo, é possível visualizar:
 
 - Tabela com os detalhes de todas as transações que o usuário participou;
 
 - Mecanismo para filtrar a tabela por data de transação e/ou transações do tipo cash-in/cash-out;
-
-![](/home/leonancosta/.var/app/com.github.marktext.marktext/config/marktext/images/2022-11-21-17-51-00-image.png)
