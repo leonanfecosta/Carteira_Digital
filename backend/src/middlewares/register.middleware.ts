@@ -14,15 +14,6 @@ export default class RegisterMiddleware {
   if (username.length < 3) {
     throw new customError(400, 'Username must be at least 3 characters long');
   }
-  const foundUser = await User.findOne({
-    where: {
-      username: username,
-    },
-  });
-  if (foundUser) {
-    throw new customError(409, 'Username already exists');
-  }
-
   const regex =
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z$*&@#]{8,}$/;
 
@@ -32,6 +23,15 @@ export default class RegisterMiddleware {
       'Password must contain at least 8 characters, one uppercase, one lowercase and one number'
     );
   }
+  const foundUser = await User.findOne({
+    where: {
+      username: username,
+    },
+  });
+  if (foundUser) {
+    throw new customError(409, 'Username already exists');
+  }
+
 
   next();
 };

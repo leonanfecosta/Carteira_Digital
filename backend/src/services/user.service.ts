@@ -33,7 +33,7 @@ export default class UserService {
     });
 
     if (!userInfo) {
-      throw new CustomError(404, 'User not found');
+      throw new CustomError(401, 'User not found');
     }
     const validatePassword = md5(password) === userInfo.password;
     if (!validatePassword) {
