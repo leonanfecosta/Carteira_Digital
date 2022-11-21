@@ -12,7 +12,7 @@ import { ITransactionInfo } from '../interfaces/transactions.interface';
 
 export default function Main() {
   const navigate = useNavigate();
-  const [user, _setUser] = useState<IUser | null>(
+  const [user, setUser] = useState<IUser | null>(
     JSON.parse(localStorage.getItem('user') as string)
   );
   const [account, setAccount] = useState<IAccount | null>(null);
@@ -20,6 +20,35 @@ export default function Main() {
   const [amount, setAmount] = useState('');
   const [error, setError] = useState('');
   const [transactions, setTransactions] = useState<ITransactionInfo[]>([]);
+  const [isFiltering, setIsFiltering] = useState(false);
+  const [cashInFilter, setCashInFilter] = useState('');
+  const [cashOutFilter, setCashOutFilter] = useState('');
+  const [date, setDate] = useState('');
+  const [filter, setFilter] = useState('');
+
+  const verifyFilter = useCallback(() => {
+    if (cashInFilter || cashOutFilter || date) {
+      setIsFiltering(true);
+    } else {
+      setIsFiltering(false);
+    }
+  }, [cashInFilter, date, cashOutFilter]);
+
+  const handleFilter = useCallback(() => {
+    if (!cashInFilter && !cashOutFilter && isFiltering) {
+      setFilter('date');
+    } else if (!cashInFilter && !date && isFiltering) {
+      setFilter('cash-out');
+    } else if (!cashOutFilter && !date && isFiltering) {
+      setFilter('cash-in');
+    } else if (!cashInFilter && isFiltering) {
+      setFilter('date and cash-out');
+    } else if (!cashOutFilter && isFiltering) {
+      setFilter('date and cash-in');
+    } else {
+      setFilter('');
+    }
+  }, [cashInFilter, cashOutFilter, date, isFiltering]);
 
   const fetchUserInfo = useCallback(async () => {
     try {
@@ -29,6 +58,7 @@ export default function Main() {
         },
       });
       setAccount(response.data);
+      // setUser(response.data.user);
       return response.data as IAccount;
     } catch (error: AxiosError | any) {
       if (
@@ -44,11 +74,17 @@ export default function Main() {
 
   const getTransactions = useCallback(async () => {
     try {
+      verifyFilter();
+      handleFilter();
       const response = await axios.get(
         'http://localhost:3001/transaction/filter',
         {
           headers: {
             Authorization: user?.token as string,
+          },
+          params: {
+            filter: filter ? filter : '',
+            date: date ? date : '',
           },
         }
       );
@@ -56,7 +92,7 @@ export default function Main() {
     } catch (error: AxiosError | any) {
       console.log(error);
     }
-  }, [user]);
+  }, [user, verifyFilter, date, filter, handleFilter]);
 
   const handleTransfer = useCallback(async () => {
     try {
@@ -103,7 +139,7 @@ export default function Main() {
           break;
       }
     }
-  }, [amount, recipient, user, fetchUserInfo]);
+  }, [amount, recipient, user, fetchUserInfo, getTransactions]);
 
   useEffect(() => {
     fetchUserInfo();
@@ -133,6 +169,27 @@ export default function Main() {
         </div>
       </div>
       <div className={style.table}>
+        <h1>Histórico de Transações</h1>
+        <div>
+          <input
+            type="radio"
+            value="Cash-In"
+            name="filter"
+            onChange={({ target }) => {
+              setCashInFilter(target.value);
+              setCashOutFilter('');
+            }}
+          />
+          Cash-In
+          <input
+            type="radio"
+            value="Cash-Out"
+            name="filter"
+            onChange={({ target }) => {setCashOutFilter(target.value); setCashInFilter('');}}
+          />
+          Cash-Out
+          <input type="date" onChange={({ target }) => setDate(target.value)} />
+        </div>
         <TransferTable
           username={user?.username as string}
           transactions={transactions}

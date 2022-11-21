@@ -4,7 +4,7 @@ interface InputProps {
   label: string;
   value: string | number;
   name: string;
-  type: 'text' | 'password' | 'number';
+  type: 'text' | 'password' | 'number' | 'radio';
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
 }

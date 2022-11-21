@@ -76,12 +76,11 @@ export default class TransactionController {
       const date = req.query.date as string;
       const filter = req.query.filter as string;
 
-      const formatedDate = moment(new Date(date)).format('YYYY-MM-DD');
       const userInfo = (await this._userService.getUserInfo(user)) as IUserInfo;
       const transactions =
         await this._transactionService.filterTransactionsByDate(
           userInfo,
-          formatedDate,
+          date,
           filter
         );
       res.status(200).json(transactions);
