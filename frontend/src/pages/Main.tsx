@@ -169,31 +169,44 @@ export default function Main() {
         </div>
       </div>
       <div className={style.table}>
-        <h1>Histórico de Transações</h1>
         <div>
-          <input
-            type="radio"
-            value="Cash-In"
-            name="filter"
-            onChange={({ target }) => {
-              setCashInFilter(target.value);
-              setCashOutFilter('');
-            }}
-          />
-          Cash-In
-          <input
-            type="radio"
-            value="Cash-Out"
-            name="filter"
-            onChange={({ target }) => {setCashOutFilter(target.value); setCashInFilter('');}}
-          />
-          Cash-Out
-          <input type="date" onChange={({ target }) => setDate(target.value)} />
+          <h1>Histórico de Transações</h1>
+          <div className={style.input_container}>
+            <input
+              type="radio"
+              value="Cash-In"
+              name="filter"
+              onChange={({ target }) => {
+                setCashInFilter(target.value);
+                setCashOutFilter('');
+              }}
+            />
+            Cash-In
+            <input
+              type="radio"
+              value="Cash-Out"
+              name="filter"
+              onChange={({ target }) => {
+                setCashOutFilter(target.value);
+                setCashInFilter('');
+              }}
+            />
+            Cash-Out
+            <input
+              type="date"
+              onChange={({ target }) => setDate(target.value)}
+              className={style.date}
+            />
+          </div>
         </div>
-        <TransferTable
-          username={user?.username as string}
-          transactions={transactions}
-        />
+        {transactions.length ? (
+          <TransferTable
+            username={user?.username as string}
+            transactions={transactions}
+          />
+        ) : (
+          <h1>Você não tem nenhum lançamento nos últimos dias</h1>
+        )}
       </div>
     </div>
   );

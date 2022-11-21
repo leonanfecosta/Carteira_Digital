@@ -1,0 +1,28 @@
+.table {
+  font-size: 18px;
+  width: 90%;
+  margin: 10px auto;
+  border-collapse: collapse;
+}
+
+.tableHead {
+  background-color: var(--background-color);
+  color: #c5c5c5;
+  font-weight: 600;
+  text-align: center;
+}
+
+.tableHead>tr>th {
+  padding: 5px;
+}
+
+.tableBody {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: center;
+}
+
+.tableBody>tr>td {
+  border: 1px solid rgba(197, 197, 197, 0.1);
+  padding: 5px;
+}
