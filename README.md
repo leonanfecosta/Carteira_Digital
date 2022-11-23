@@ -8,12 +8,22 @@ Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo seja possib
 Você precisa ter instalado as seguintes ferramentas: [Git](https://git-scm.com), [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/install/).
 Será necessário que a porta 3000 e 3001 estejam disponíveis para a aplicação e o Postgres usará a porta 5432.
 
+Antes de subir o cointainer é preciso realizar as instalações das dependências localmente, para isso faça:
+
+```
+cd backend
+npm install
+cd ..
+cd frontend
+npm install
+```
+Logo após suba o container docker da aplicação:
+
 ```login
-npm run compose:up
-npm run compose:down // para parar completamente a aplicação
+docker-compose up -d
+docker-compose down // para parar completamente a aplicação
 ```
 
-Ao subir o container todas as dependências necessárias serão automaticamente instaladas. 
 Depois disso será rodado o comando `npm start` no front end e o comando `npm run dev`no back end. Após isso a aplicação ja estará disponivel no endereço `http://localhost:3000` e o back end disponível no endereço `http://localhost:3001`.
 
 # Back-End
