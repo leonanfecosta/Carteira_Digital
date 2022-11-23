@@ -2,12 +2,35 @@
 
 ## Desafio 
 Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo seja possibilitar que usuários da NG consigam realizar transferências internas entre si.
+## 🛠️ Ferramentas Utilizadas
 
-### Instruções
+## - Front End:
+  - React
+  - Typescript
+  - React Router Dom
+  - Context Api
+  - React Hooks
+  - Phosphor React Icons
+  
+## - Back End:
+  - Node
+  - Typescript
+  - Express
+  - Cors
+  - Sequelize
+  - md5
+  - Jwt
+  - Postgreesql
+  
+## ⚙️Instruções de como executar com Docer
 
 Você precisa ter instalado as seguintes ferramentas: [Git](https://git-scm.com), [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/install/).
 Será necessário que a porta 3000 e 3001 estejam disponíveis para a aplicação e o Postgres usará a porta 5432.
 
+ Clone o repositório em uma pasta de sua preferencia 
+```
+git@github.com:leonanfecosta/NG.CASH.git
+```
 Antes de subir o cointainer é preciso realizar as instalações das dependências localmente, para isso faça:
 
 ```
