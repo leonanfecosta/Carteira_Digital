@@ -1,4 +1,4 @@
-# NG.CASH
+# NG.CASH - Carteira Digital
 
 ## Desafio 
 Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo seja possibilitar que usuários da NG consigam realizar transferências internas entre si.
