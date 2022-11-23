@@ -10,7 +10,6 @@ Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo seja possib
   - React Router Dom
   - Context Api
   - React Hooks
-  - Phosphor React Icons
   
 ## - Back End:
   - Node
