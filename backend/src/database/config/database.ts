@@ -3,15 +3,15 @@ require("dotenv/config");
 import { Options } from "sequelize";
 
 const config: Options = {
-  dialect: "postgres",
-  host: process.env.DB_HOST || "localhost",
-  username: process.env.POSTGRES_USER || "postgres",
-  password: process.env.PASSWORD || "123456",
-  database: "NG-Dev",
-  port: 5432,
+  dialect: 'postgres',
+  host: process.env.PGHOST,
+  username: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
+  port: Number(process.env.PGPORT),
   dialectOptions: {
-    timezone: "Z",
-  }, 
+    timezone: 'Z',
+  },
   logging: false,
   define: {
     timestamps: true,
