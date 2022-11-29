@@ -8,6 +8,8 @@ RUN npm config set cache /tmp --global
 
 RUN npm install
 
+RUN npm run build
+
 COPY . ./
 
-CMD [ "npm", "run", "dev" ] 
+CMD [ "npm", "run", "start" ] 
